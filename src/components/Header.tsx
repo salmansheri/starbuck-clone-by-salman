@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from 'react-icons/ai'; 
 
 const Header = () => {
+  const router = useRouter(); 
     const [hasOpen, setHasOpen] = useState(false); 
   const pathname = usePathname();
   const navItems = [
@@ -39,7 +40,10 @@ const Header = () => {
     <>
       {/* desktop  */}
       <div className="flex flex-row justify-end  md:justify-between px-10 h-28 border">
-        {/* left  */}
+      {
+        pathname !== "/signIn" && pathname !== "/signUp" && (
+          <>
+          
         <div className="hidden md:flex flex-row space-x-10">
           {navItems.map((item) => (
             <div
@@ -55,10 +59,10 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-10">
           <span> Find a store</span>
           <div className="flex flex-row space-x-5">
-            <button className="px-5 py-1 border-2 border-coffeeBlack rounded-full inline-flex items-center bg-coffeeWhite hover:bg-black/10 transition-all ease-in">
+            <button className="px-5 py-1 border-2 border-coffeeBlack rounded-full inline-flex items-center bg-coffeeWhite hover:bg-black/10 transition-all ease-in" onClick={() => router.push("/signIn")}>
               Sign in
             </button>
-            <button className="px-5 py-1 bg-coffeeBlack rounded-full text-white inline-flex items-center hover:bg-opacity-70">
+            <button className="px-5 py-1 bg-coffeeBlack rounded-full text-white inline-flex items-center hover:bg-opacity-70" onClick={() => router.push("/signUp")}>
               Join now
             </button>
           </div>
@@ -89,6 +93,10 @@ const Header = () => {
             )}
         
           </div>
+          </>
+        )
+      }
+        {/* left  */}
 
      
       </div>

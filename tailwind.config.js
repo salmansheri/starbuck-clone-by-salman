@@ -14,6 +14,7 @@ module.exports = {
         coffeeLightBrown: "#f3f1e7",
         coffeeBlack: "#000000",
         coffeeBlue: "#d4e9e2",
+        myGreen: "#00754a",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
