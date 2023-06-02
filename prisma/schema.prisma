@@ -16,7 +16,8 @@ model User {
   email          String @unique
   hashedPassword String
 
-  orders Order[]
+  orders    Order[]
+  favorites Favorite[]
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
@@ -27,6 +28,8 @@ model Product {
   title String
   price Int     @default(0)
   desc  String?
+  imageUrl String?
+  category String?
 
   orders Order[]
 }
@@ -38,7 +41,23 @@ model Order {
   title     String
   price     Int
   quantity  Int
+  imageUrl String?
+  category String?
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  userId    String @db.ObjectId
+  productId String @db.ObjectId
+  price     Int    @default(0)
+  imageUrl String?
+  category String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
